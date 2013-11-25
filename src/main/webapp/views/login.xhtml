@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+	<link href="js/bootstrap.js" type="text/javascript"></link>
+	<link href="js/bootstrap.min.js" type="text/javascript"></link>
+	
+</h:head>
+<h:body>
+	<hr />
+	<h4>Inicio de Sesión</h4>
+	<h:form>
+
+		<table>
+		<tr>
+			<td>Username</td>
+			<td><p:inputText id="name" value="#{login.username}">
+				</p:inputText>
+			</td>
+		</tr>
+		<tr>
+			<td>Password:</td> 
+			<td><p:password id="pass" value="#{login.password}"></p:password>
+			</td>
+		</tr>
+
+		<tr>
+			<td><p:commandButton actionListener="#{login.init}" value="Login" styleClass="ui-priority-primary" style="background-color:#0064cd; border:0 none;">
+			</p:commandButton>
+			</td>
+		</tr>
+		
+		</table>
+		<div style="width:26%;">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		</div>
+			
+	</h:form>
+</h:body>
+
+</html>

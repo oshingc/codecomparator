@@ -1,0 +1,8 @@
+div.centrarTabla {
+	text-align: center;
+}
+
+div.centrarTabla table {
+	margin: 0 auto;
+	text-align: left;
+}
