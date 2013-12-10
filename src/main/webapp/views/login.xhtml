@@ -7,41 +7,34 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css"></link>
-	<link href="js/bootstrap.js" type="text/javascript"></link>
-	<link href="js/bootstrap.min.js" type="text/javascript"></link>
-	
+	<title>CodeComparator v0.1 - Inicio de Sesión</title>
+	<link type="text/css" rel="stylesheet" href="css/main.css" />
 </h:head>
-<h:body>
+
+<h:body style="background:url(img/code.jpeg); text-align:center">
 	<hr />
-	<h4>Inicio de Sesión</h4>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<p:growl id="mensajes" showDetail="true" sticky="true" />
 	<h:form>
+		<h1 style="color: #ededed;">CodeComparator v0.1</h1>
+		<p:panel header="Inicio de Sesión" styleClass="panel-login">
+			<h:panelGrid columns="2" cellpadding="4">
+				<h:outputLabel for="username" value="Username" />
+				<p:inputText id="username" value="#{loginController.username}" />
 
-		<table>
-		<tr>
-			<td>Username</td>
-			<td><p:inputText id="name" value="#{login.username}">
-				</p:inputText>
-			</td>
-		</tr>
-		<tr>
-			<td>Password:</td> 
-			<td><p:password id="pass" value="#{login.password}"></p:password>
-			</td>
-		</tr>
+				<h:outputLabel for="password" value="Password" />
+				<p:password id="password" value="#{loginController.password}" />
 
-		<tr>
-			<td><p:commandButton actionListener="#{login.init}" value="Login" styleClass="ui-priority-primary" style="background-color:#0064cd; border:0 none;">
-			</p:commandButton>
-			</td>
-		</tr>
-		
-		</table>
-		<div style="width:26%;">
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-		</div>
-			
+				<f:facet name="footer">
+					<p:commandButton value="Login"
+						actionListener="#{loginController.init}" update=":mensajes" />
+				</f:facet>
+			</h:panelGrid>
+		</p:panel>
 	</h:form>
 </h:body>
 

@@ -4,13 +4,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<h:head>
+	<title>Subir proyectos para ser procesados</title>
+</h:head>
 
-<h:body>
-	<h:form id="form">
+<h:body style="background:url(../img/gallery.jpg);   ">
+	<br></br>
+	<p:growl sticky="true" />
+	<h:form id="form" style="width:700px; margin:0 auto">
+		<br></br>
+		<p:fileUpload
+			fileUploadListener="#{projectUploadController.uploadProjectA}"
+			allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000" label="Proyecto A" />
+		<br></br>
+	</h:form>
 
-		<p:fileUpload fileUploadListener="#{fileUploadController.upload}"
-			allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000" />
+	<h:form style="width:700px; margin:0 auto">
+		<br></br>
+		<p:fileUpload
+			fileUploadListener="#{projectUploadController.uploadProjectB}"
+			allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000" label="Proyecto B" />
 
 	</h:form>
 </h:body>

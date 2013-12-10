@@ -21,22 +21,37 @@
 		<param-value>resources.application</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		/WEB-INF/applicationContext.xml
+		/WEB-INF/command-context/context*.xml
+		</param-value>
+	</context-param>
+
 	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+		<!-- <listener-class>com.sun.faces.config.ConfigureListener</listener-class> -->
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>views/index.xhtml</welcome-file>
+		<!-- <welcome-file>views/index.xhtml</welcome-file> -->
+		<welcome-file>views/login.xhtml</welcome-file>
 	</welcome-file-list>
-	
+
+	<!-- * -->
 	<filter>
-  <filter-name>PrimeFaces FileUpload Filter</filter-name>
-  <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-</filter>
-<filter-mapping>
-  <filter-name>PrimeFaces FileUpload Filter</filter-name>
-  <servlet-name>Faces Servlet</servlet-name>
-</filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<!-- * -->
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
@@ -45,6 +60,10 @@
 	<!-- <context-param> -->
 	<!-- <param-name>primefaces.THEME</param-name> -->
 	<!-- <param-value>dark-hive</param-value> -->
+	<!-- </context-param> -->
+	<!-- <context-param> -->
+	<!-- <param-name>primefaces.THEME</param-name> -->
+	<!-- <param-value>cupertino</param-value> -->
 	<!-- </context-param> -->
 
 	<servlet>
