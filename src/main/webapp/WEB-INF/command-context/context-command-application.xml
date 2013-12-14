@@ -6,7 +6,11 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<bean id="projectCommandFacade"
-		class="pe.com.codecomparator.model.command.facade.impl.ProjectCommandFacadeImpl" />
+	<bean id="serviceFile"
+		class="pe.com.codecomparator.model.command.application.service.impl.ServiceFileImpl" />
+	<bean id="serviceProject"
+		class="pe.com.codecomparator.model.command.application.service.impl.ServiceProjectImpl" />
+	<bean id="userCommandApplicationService"
+		class="pe.com.codecomparator.model.command.application.service.impl.UserCommandApplicationServiceImpl" />
 
 </beans>

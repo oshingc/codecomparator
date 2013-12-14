@@ -25,7 +25,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		/WEB-INF/applicationContext.xml
-		/WEB-INF/command-context/context*.xml
+		/WEB-INF/command-context/context-command*.xml
+		/WEB-INF/query-context/context-query*.xml
 		</param-value>
 	</context-param>
 

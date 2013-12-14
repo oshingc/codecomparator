@@ -47,15 +47,14 @@ public class ProjectCommandFacadeImpl implements ProjectCommandFacade {
 				+ fileNameWithoutExtension
 				+ CodeComparatorConstants.FORWARDSLASH + projectSourcePath;
 
-		/***************************************************/
-
 		project.setName(fileNameWithoutExtension);
 		serviceProject.populateProject(project, projectSourcePath);
 
 		System.out.println(project.getPackages());
 
 		/***************************************************/
-
+		// TODO eliminar este recorrido, sólo útil para ver los archivos java en
+		// el directorio del proyecto
 		ArrayList<File> filesProyecto1 = new ArrayList<File>();
 		serviceFile.listf(directoryName, filesProyecto1,
 				CodeComparatorConstants.JAVA_FILE_EXTENSION);
@@ -69,6 +68,7 @@ public class ProjectCommandFacadeImpl implements ProjectCommandFacade {
 		}
 
 		System.out.println("New file created!");
+		/***************************************************/
 	}
 
 }
