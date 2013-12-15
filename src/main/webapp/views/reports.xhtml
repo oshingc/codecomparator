@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Resultados</title>
+</h:head>
+
+<h:body
+	style="background: url(../img/wolf.jpg) fixed; text-align: center; position: absolute;">
+	<style>
+.jqplot-table-legend {
+	display: none;
+}
+
+.ui-widget-content {
+	opacity: 0.95;
+}
+</style>
+	<h1 style="color: #ededed;">CodeComparator v0.1</h1>
+	<p
+		style="color: #9CB5D6; font-family: monospace; font-size: 18px; font-weight: bold; text-align: center;">
+		Resultado de comparación</p>
+	<p:dataTable var="container" value="#{reportController.containers}">
+		<p:column headerText="Códigos Fuente">
+			<p:panelGrid columns="1">
+				<h:panelGroup>
+					<p:lineChart id="a" value="#{container.chartOne}"
+						legendPosition="e" title="#{container.codeFirstProyect.name}"
+						minY="0" maxY="1" minX="0" style="height:200px;margin-top:20px" />
+					<p:lineChart id="b" value="#{container.chartTwo}"
+						legendPosition="e" title="#{container.codeSecondProyect.name}"
+						minY="0" maxY="1" minX="0" style="height:200px;margin-top:20px" />
+				</h:panelGroup>
+			</p:panelGrid>
+		</p:column>
+		<p:column width="10%" headerText="Índice de similitud">
+			<div align="center">
+				<h:panelGroup>
+					<h:outputText value="#{container.fdtw}" />
+				</h:panelGroup>
+			</div>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>

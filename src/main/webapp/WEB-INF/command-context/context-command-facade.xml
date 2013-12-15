@@ -10,5 +10,7 @@
 		class="pe.com.codecomparator.model.command.facade.impl.UserCommandFacadeImpl" />
 	<bean id="projectCommandFacade"
 		class="pe.com.codecomparator.model.command.facade.impl.ProjectCommandFacadeImpl" />
+	<bean id="comparisonCommandFacade"
+		class="pe.com.codecomparator.model.command.facade.impl.ComparisonCommandFacadeImpl" />
 
 </beans>

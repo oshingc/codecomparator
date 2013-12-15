@@ -13,21 +13,11 @@ public class CodeConverter {
 	public Double[] Q;
 	public StartUp config;
 
-	// private BufferedReader loadSourceCode() {
-	// DataInputStream dis = new DataInputStream(this.getClass()
-	// .getResourceAsStream(
-	// "../cSharpCodeConverter/CSharpCodeConverter.cs"));
-	// return new BufferedReader(new InputStreamReader(dis));
-	// }
-
-	/*
-	 * Remueve los comentarios del archivo fuente y divide el código en
-	 * instrucciones, que se almacenan línea a línea en un ArrayList
-	 */
+	// public StartUp1 config;
 
 	public String[] split(String value, String[] separators) {
 		String[] words = null;
-		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> temp = new ArrayList<>();
 		for (String separator : separators) {
 			value = value.replaceAll(separator, "¬");
 		}
@@ -41,21 +31,27 @@ public class CodeConverter {
 		return words;
 	}
 
+	/**
+	 * Remueve los comentarios del archivo fuente y divide el código en
+	 * instrucciones, que se almacenan línea a línea en un ArrayList
+	 */
 	private String insert(String source, int index, String pattern) {
 		String out = source.substring(0, index) + pattern
 				+ source.substring(index);
 		return out;
 	}
 
-	public void RemoveComments() {
+	private void RemoveComments() {
+		String line = "--";
 		try {
 			// using(StreamReader sr = new StreamReader(file))
 			// BufferedReader br = loadSourceCode();
 			BufferedReader br = file;
 			// StreamReader sr = new StreamReader(file);
 			// while (!sr.EndOfStream) {
-			String line;
 			while ((line = br.readLine()) != null) {
+				// System.out.println("::::::::::" + line);
+
 				// String line = sr.ReadLine();
 				int index;
 				// Es comentario simple
@@ -92,12 +88,14 @@ public class CodeConverter {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error en la lectura del archivo");
+			System.out
+					.println("Ocurrió un error en la lectura del archivo en la línea :: \n"
+							+ line);
 			e.printStackTrace();
 		}
 	}
 
-	/*
+	/**
 	 * De las instrucciones almacenadas en code_lines, se remueven las
 	 * directivas using para códigos de C#
 	 */
@@ -107,7 +105,7 @@ public class CodeConverter {
 		String t;
 		for (int index = 0; index < code_lines.size(); index++) {
 			t = (String) code_lines.get(index);
-			if (t.contains("using")) {
+			if (t.contains("import")) {
 				continue;
 			} else {
 				temp.add(code_lines.get(index));
@@ -125,95 +123,98 @@ public class CodeConverter {
 	 */
 	@SuppressWarnings("static-access")
 	public final void TransformCodeOperatorLevel() {
-		RemoveComments();
-		RemoveDirectives();
-		IsCategoryLevel = false;
-
-		/*
-		 * En el arreglo split deben encontrarse todos los operadores del
-		 * lenguaje además de los separadores de clase y de función
-		 */
-		String[] se = new String[] { "[{]+", "}", " " };
-		String[] split = new String[config.operators.length + se.length];
-		// config.operators.CopyTo(split, 0);
-		System.arraycopy(config.operators, 0, split, 0, config.operators.length);
-		System.arraycopy(se, 0, split, config.operators.length, se.length);
-
-		for (String s : code_lines) {
-			System.out.println(s);
-		}
-
-		String line;
-		for (int index = 0; index < code_lines.size(); index++) {
-			line = (String) code_lines.get(index);
-			// String[] tokens = line.Split(split,
-			// StringSplitOptions.RemoveEmptyEntries);
-			String[] tokens = split(line, split);
-			String operaciones = line;
+		try {
+			RemoveComments();
+			RemoveDirectives();
+			IsCategoryLevel = false;
 
 			/*
-			 * Diferencia del vector de tokens con la línea de código para
-			 * obtener las operaciones que afectan a esa línea
+			 * En el arreglo split deben encontrarse todos los operadores del
+			 * lenguaje además de los separadores de clase y de función
 			 */
-			for (int i = 0; i < tokens.length; i++) {
-				if (operaciones.contains(tokens[i])) {
-					int ind = operaciones.indexOf(tokens[i]);
-					operaciones = operaciones.substring(0, ind)
-							+ operaciones.substring(ind + tokens[i].length());
-					// operaciones = operaciones.insert(ind, "¿");
-					operaciones = insert(operaciones, ind, "¿");
-				}
-			}
-			System.out.println(operaciones);
-			ArrayList<Double> token_line = new ArrayList<Double>();
-			int pos = 0;
-			for (int j = 0; j < operaciones.length(); j++) {
-				// if (operaciones.charAt(j).equals('¿')) {
-				if (operaciones.charAt(j) == '�') {
-					token_line.add(TokenValue(tokens[pos++]));
-				}
-				// else if (operaciones.charAt(j).toString().equals(" ") ==
-				// false
-				// && operaciones.charAt(j).toString().equals("{") == false
-				// && operaciones.charAt(j).toString().equals("}") == false) {
-				else if (operaciones.charAt(j) == ' '
-						&& operaciones.charAt(j) == '{'
-						&& operaciones.charAt(j) == '}') {
-					int next_quote = operaciones.indexOf("¿", j);
-					String op;
-					if (next_quote > j) {
-						op = operaciones.substring(j, next_quote);
-					} else {
-						op = operaciones.substring(j, operaciones.length());
-					}
-					token_line.add(TokenValue(op));
-					if (next_quote != -1) {
-						j = next_quote - 1;
-					} else {
-						break;
-					}
-				}
-			}
+			String[] se = new String[] { "[{]+", "}", " " };
+			String[] split = new String[config.operators.length + se.length];
+			// config.operators.CopyTo(split, 0);
+			System.arraycopy(config.operators, 0, split, 0,
+					config.operators.length);
+			System.arraycopy(se, 0, split, config.operators.length, se.length);
 
-			if (token_line.size() > 1) {
-				Code_Image ci = new Code_Image(token_line, line);
-				// ci.code_line = line;
-				// ci.code_img = token_line;
-				converted_code.add(ci);
-			}
-		}
-		ArrayList<Double> temp = new ArrayList<Double>();
-		// if (((Code_Image) converted_code.get(0)).code_img[0].getClass()
-		// .getName().equals("Double")) {
-		if (converted_code.get(0).getCode_img().get(0) instanceof Double) {
-			for (Code_Image TkLn : converted_code) {
-				for (double val : TkLn.getCode_img()) {
-					temp.add(val);
+			String line;
+			for (int index = 0; index < code_lines.size(); index++) {
+				line = (String) code_lines.get(index);
+				// String[] tokens = line.Split(split,
+				// StringSplitOptions.RemoveEmptyEntries);
+				String[] tokens = split(line, split);
+				String operaciones = line;
+
+				/*
+				 * Diferencia del vector de tokens con la línea de código para
+				 * obtener las operaciones que afectan a esa línea
+				 */
+				for (int i = 0; i < tokens.length; i++) {
+					if (operaciones.contains(tokens[i])) {
+						int ind = operaciones.indexOf(tokens[i]);
+						operaciones = operaciones.substring(0, ind)
+								+ operaciones.substring(ind
+										+ tokens[i].length());
+						// operaciones = operaciones.insert(ind, "¿");
+						operaciones = insert(operaciones, ind, "¿");
+					}
+				}
+
+				ArrayList<Double> token_line = new ArrayList<Double>();
+				int pos = 0;
+				for (int j = 0; j < operaciones.length(); j++) {
+					// if (operaciones.charAt(j).equals('¿')) {
+					if (operaciones.charAt(j) == '¿') {
+						token_line.add(TokenValue(tokens[pos++]));
+					}
+					// else if (operaciones.charAt(j).toString().equals(" ") ==
+					// false
+					// && operaciones.charAt(j).toString().equals("{") == false
+					// && operaciones.charAt(j).toString().equals("}") == false)
+					// {
+					else if (operaciones.charAt(j) == ' '
+							&& operaciones.charAt(j) == '{'
+							&& operaciones.charAt(j) == '}') {
+						int next_quote = operaciones.indexOf("¿", j);
+						String op;
+						if (next_quote > j) {
+							op = operaciones.substring(j, next_quote);
+						} else {
+							op = operaciones.substring(j, operaciones.length());
+						}
+						token_line.add(TokenValue(op));
+						if (next_quote != -1) {
+							j = next_quote - 1;
+						} else {
+							break;
+						}
+					}
+				}
+
+				if (token_line.size() > 1) {
+					Code_Image ci = new Code_Image(token_line, line);
+					// ci.code_line = line;
+					// ci.code_img = token_line;
+					converted_code.add(ci);
 				}
 			}
-			// this.Q = (double[]) temp.toArray(new double[0]);
-			this.Q = new Double[temp.size()];
-			temp.toArray(this.Q);
+			ArrayList<Double> temp = new ArrayList<Double>();
+			// if (((Code_Image) converted_code.get(0)).code_img[0].getClass()
+			// .getName().equals("Double")) {
+			if (converted_code.get(0).getCode_img().get(0) instanceof Double) {
+				for (Code_Image TkLn : converted_code) {
+					for (double val : TkLn.getCode_img()) {
+						temp.add(val);
+					}
+				}
+				// this.Q = (double[]) temp.toArray(new double[0]);
+				this.Q = new Double[temp.size()];
+				temp.toArray(this.Q);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

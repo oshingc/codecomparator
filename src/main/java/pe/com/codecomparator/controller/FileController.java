@@ -24,13 +24,10 @@ import pe.com.codecomparator.model.command.application.service.impl.ServiceFileI
 //@SessionScoped
 public class FileController implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final String URLPROYECTO1 = "/webapp/projects/one/";
 	private static final String URLPROYECTO2 = "/webapp/projects/two/";
-	
+
 	private Part file1;
 	private Part file2;
 
@@ -70,7 +67,7 @@ public class FileController implements Serializable {
 		f.deleteContentFolder(folderProyecto2);
 
 		System.out.println(file1.getName());
-		
+
 		String archivoProyecto1 = servletContext.getRealPath(URLPROYECTO1
 				+ f.getFilename(file1));
 		System.out.println();

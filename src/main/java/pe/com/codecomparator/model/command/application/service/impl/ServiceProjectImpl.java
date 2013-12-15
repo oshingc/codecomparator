@@ -6,7 +6,9 @@ import pe.com.codecomparator.domain.Code;
 import pe.com.codecomparator.domain.CodeComparatorConstants;
 import pe.com.codecomparator.domain.Project;
 import pe.com.codecomparator.domain.Package;
+import pe.com.codecomparator.domain.util.FileUtil;
 import pe.com.codecomparator.model.command.application.service.ServiceProject;
+import pe.com.codecomparator.model.command.core.converter.CodeConverter;
 
 public class ServiceProjectImpl implements ServiceProject {
 
@@ -14,7 +16,7 @@ public class ServiceProjectImpl implements ServiceProject {
 	public int checkIdeToBuildProject(String directoryName) {
 		int ideProject = CodeComparatorConstants.WITHOUT_ID;
 		File directoryProject = new File(directoryName);
-		/**************** ECLIPSE PROJECT ******************/
+		// ECLIPSE PROJECT
 		for (File file : directoryProject.listFiles()) {
 			if (file.isHidden()) {
 				if (file.getName().equals(
@@ -22,9 +24,8 @@ public class ServiceProjectImpl implements ServiceProject {
 					return CodeComparatorConstants.ECLIPSE_PROJECT;
 			}
 		}
-		/***************************************************/
 
-		/**************** NETBEANS PROJECT ******************/
+		// NETBEANS PROJECT
 		directoryProject = new File(directoryName);
 		for (File file : directoryProject.listFiles()) {
 			if (file.getName().equals(
@@ -33,7 +34,6 @@ public class ServiceProjectImpl implements ServiceProject {
 							.equals(CodeComparatorConstants.NAME_NBPROJECT_DIRECTORY_NETBEANS))
 				return CodeComparatorConstants.NETBEANS_PROJECT;
 		}
-		/***************************************************/
 
 		return ideProject;
 	}
@@ -45,7 +45,6 @@ public class ServiceProjectImpl implements ServiceProject {
 
 	private void travelDirectory(Project project, String directory) {
 		File projectSourceDirectory = new File(directory);
-		System.out.println("::::" + directory);
 		for (File file : projectSourceDirectory.listFiles()) {
 			if (file.isDirectory()) {
 				Package _package = new Package();
@@ -56,6 +55,7 @@ public class ServiceProjectImpl implements ServiceProject {
 				Code _code = new Code();
 				_code.setName(file.getName());
 				_code.setFile(file);
+				_code.setQ(convertCode(_code));
 				project.getCodes().add(_code);
 			}
 		}
@@ -74,6 +74,7 @@ public class ServiceProjectImpl implements ServiceProject {
 				Code _code = new Code();
 				_code.setName(file.getName());
 				_code.setFile(file);
+				_code.setQ(convertCode(_code));
 				_package.getCodes().add(_code);
 			}
 		}
@@ -86,6 +87,20 @@ public class ServiceProjectImpl implements ServiceProject {
 			return true;
 		}
 		return false;
+	}
+
+	private Double[] convertCode(Code code) {
+		CodeConverter converter = new CodeConverter();
+		try {
+			converter.setFile(FileUtil.obtainBufferedReaderFromFile(code
+					.getFile()));
+			converter.TransformCodeOperatorLevel();
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al convertir el código :: \n");
+			System.out.println(code.getFile().getName());
+			e.printStackTrace();
+		}
+		return converter.Q;
 	}
 
 }

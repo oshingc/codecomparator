@@ -6,9 +6,6 @@ import java.util.Collection;
 
 public class Package implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4843115943266287488L;
 	private String name;
 	private Collection<Code> codes = new ArrayList<Code>();

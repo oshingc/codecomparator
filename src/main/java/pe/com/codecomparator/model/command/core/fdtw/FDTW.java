@@ -9,9 +9,9 @@ import java.util.Collections;
 public class FDTW
 {
 	//FDTW 
-	public double[] Q;  //Secuencia 
-	public double[] C;  //Secuencia
-	public double[][] M;  // Matriz de distancias 
+	public Double[] Q;  //Secuencia 
+	public Double[] C;  //Secuencia
+	public Double[][] M;  // Matriz de distancias 
 	//FDTW & Pattern Recognition 
 	public Node[] Path;  //Array of index in M, for subsequence detection 
 	public int patterns_founded; 
@@ -24,17 +24,17 @@ public class FDTW
 	}
 	
 	// Se asigna la secuencia _Q, _C a Q y C
-	public void SetSequences(double[] _Q, double[] _C) 
+	public void SetSequences(Double[] _Q, Double[] _C) 
 	{
-		Q = (double[])_Q.clone(); 
-		C = (double[])_C.clone(); 
+		Q = (Double[])_Q.clone(); 
+		C = (Double[])_C.clone(); 
 	}
 	
 	//Returns de FDTW distance between Q,C Sequences 
 	public double GetDistance() 
 	{ 
 		try{ 
-			M = new double[Q.length][C.length]; 
+			M = new Double[Q.length][C.length]; 
 			//First element 
 			M[0][0] = euclidean(Q[0], C[0]); 
 			//First Row 
@@ -58,12 +58,7 @@ public class FDTW
 			//return de FDTW distance
 			
 			
-			for(int jjj=0;jjj<M.length;jjj++){
-				for(int kkk=0;kkk<M[jjj].length;kkk++){
-					System.out.println(M[jjj][kkk]);
-				}
-				System.out.println();
-			}
+			
 			
 			return M[Q.length - 1][C.length - 1]; 
 		}catch(Exception ex) { 
@@ -74,7 +69,7 @@ public class FDTW
 	}
 	
 	//Returns the Euclidean distance between two values 
-	private double euclidean(double q, double c){ 
+	private double euclidean(Double q, Double c){ 
 		//return Math.abs(q-c);
 		return(Math.sqrt(Math.pow(q - c, 2))); 
 	}

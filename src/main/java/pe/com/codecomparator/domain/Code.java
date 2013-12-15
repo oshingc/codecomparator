@@ -5,12 +5,10 @@ import java.io.Serializable;
 
 public class Code implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4910922867942133113L;
 	private String name;
 	private File file = null;
+	private Double[] Q;
 
 	public String getName() {
 		return name;
@@ -26,6 +24,14 @@ public class Code implements Serializable {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	public Double[] getQ() {
+		return Q;
+	}
+
+	public void setQ(Double[] q) {
+		Q = q;
 	}
 
 	@Override

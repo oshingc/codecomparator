@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 //import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -51,42 +52,44 @@ public class LoginController implements Serializable {
 	public void init(ActionEvent actionEvent) throws IOException {
 		System.out.println("LoginController.init()");
 		if (this.username.equals("") && this.password.equals("")) {
-			addWarn(actionEvent, "Ingrese todos los campos");
+			addWarn(FacesMessage.SEVERITY_WARN, "Complete todos los campos");
 		} else {
 			if (this.password.equals("")) {
-				addWarn(actionEvent, "Ingrese una contraseña");
+				addWarn(FacesMessage.SEVERITY_WARN, "Ingrese una contraseña");
 			} else {
 				if (this.username.equals("")) {
-					addWarn(actionEvent, "Ingrese nombre de usuario");
+					addWarn(FacesMessage.SEVERITY_WARN,
+							"Ingrese nombre de usuario");
 
 				} else {
-
-					// busqueda en la db
+					// Cotejar el usuario con los registrados en la base de
+					// datos
 					User actualUser = new User();
 					actualUser.setT_username(username);
 					actualUser.setT_password(password);
 
-					System.out.println(userQueryFacade);
-
 					User obtained = userQueryFacade.validateUser(actualUser);
-					System.out.println("user: " + obtained.getT_username());
-					System.out.println("user: " + obtained.getT_password());
 
-					FacesContext.getCurrentInstance().getExternalContext()
-							.redirect("/codecomparator/views/uploadPF.xhtml");
+					if (obtained == null)
+						addWarn(FacesMessage.SEVERITY_ERROR,
+								"Usuario no registrado");
+					else {
+						System.out.println(obtained);
+						System.out.println("user: " + obtained.getT_username());
+						System.out.println("user: " + obtained.getT_password());
 
+						FacesContext.getCurrentInstance().getExternalContext()
+								.redirect("/codecomparator/views/upload.xhtml");
+					}
 				}
 			}
 
 		}
 	}
 
-	public void addWarn(ActionEvent actionEvent, String message) {
-		FacesContext.getCurrentInstance()
-				.addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_WARN, "Error:",
-								message));
+	public void addWarn(Severity severity, String message) {
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(severity, "Error:", message));
 	}
 
 }

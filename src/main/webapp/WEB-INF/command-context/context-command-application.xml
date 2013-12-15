@@ -12,5 +12,7 @@
 		class="pe.com.codecomparator.model.command.application.service.impl.ServiceProjectImpl" />
 	<bean id="userCommandApplicationService"
 		class="pe.com.codecomparator.model.command.application.service.impl.UserCommandApplicationServiceImpl" />
+	<bean id="serviceComparison"
+		class="pe.com.codecomparator.model.command.application.service.impl.ServiceComparisonImpl" />
 
 </beans>

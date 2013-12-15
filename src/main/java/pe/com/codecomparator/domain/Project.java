@@ -9,9 +9,6 @@ import java.util.Collection;
  * */
 public class Project implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9104261263964389144L;
 	private String name;
 	private Collection<Code> codes = new ArrayList<Code>();

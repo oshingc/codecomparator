@@ -37,6 +37,7 @@
 	</bean>
 	<!-- *** -->
 
+	<!-- Declaración de los controladores de la aplicación -->
 	<bean id="loginController" class="pe.com.codecomparator.controller.LoginController"
 		scope="session" />
 	<bean id="fileController" class="pe.com.codecomparator.controller.FileController"
@@ -44,5 +45,6 @@
 	<bean id="projectUploadController"
 		class="pe.com.codecomparator.controller.ProjectUploadController"
 		scope="session" />
+	<bean id="reportController" class="pe.com.codecomparator.controller.ReportController" />
 
 </beans>

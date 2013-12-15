@@ -170,10 +170,8 @@ public class ServiceFileImpl implements ServiceFile {
 			sourcePath = project
 					.getProperty(CodeComparatorConstants.PROPERTY_SRC_NETBEANS);
 			if (sourcePath.contains("\\")) {
-				/***********************************/
 				sourcePath = StringUtils
 						.replaceBackslashByForwardslash(sourcePath);
-				/***********************************/
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
