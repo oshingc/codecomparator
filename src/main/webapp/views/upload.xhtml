@@ -5,11 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<a4j:loadScript src="resource://js/jquery.js" />     
 
 <ui:composition >
   <h:form enctype="multipart/form-data">  
-
+		<p:commandButton></p:commandButton>
         <h:inputFile id="file1" value="#{uploadController.file1}"  validator="#{fileController.validateFile}" > 
          </h:inputFile>
          <h:message for="file1"/>

@@ -24,6 +24,7 @@ public class ProjectUploadController implements Serializable {
 
 	private Project firtsProject = new Project();
 	private Project secondProject = new Project();
+	private String display = "none";
 
 	@Autowired
 	private ProjectCommandFacade projectCommandFacade;
@@ -36,6 +37,8 @@ public class ProjectUploadController implements Serializable {
 			projectCommandFacade.copyProject(firtsProject, event.getFile()
 					.getFileName(), event.getFile().getInputstream(),
 					getPath(URLPROYECTO1));
+			setDisplay("block");
+			System.out.println("result : "+display);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,5 +84,14 @@ public class ProjectUploadController implements Serializable {
 	public void setSecondProject(Project secondProject) {
 		this.secondProject = secondProject;
 	}
+	
+	public void setDisplay(String display){
+		this.display = display;
+	}
+	
+	public String getDisplay(){
+		return display;
+	}
+	
 
 }
