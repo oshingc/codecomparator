@@ -21,5 +21,17 @@ public class UserQueryInfrastructureServiceImpl implements
 		// return new User();
 		//
 	}
+	
+	public User userExists(User user){
+		
+		User _user = userMapper.userExists(user.getT_username());
+		return _user;
+		
+	}
+	
+	public User emailExists(User user){
+		User _user = userMapper.emailExists(user.getT_email());
+		return _user;
+	}
 
 }

@@ -24,15 +24,18 @@
 		<p:panel header="Inicio de Sesión" styleClass="panel-login">
 			<h:panelGrid columns="2" cellpadding="4">
 				<h:outputLabel for="username" value="Username" />
-				<p:inputText id="username" value="#{loginController.username}" />
+				<p:inputText id="username" value="#{loginController.username}" style="width:180px" />
 
 				<h:outputLabel for="password" value="Password" />
-				<p:password id="password" value="#{loginController.password}" />
+				<p:password id="password" value="#{loginController.password}" style="width:180px"/>
 
 				<f:facet name="footer">
 					<p:commandButton value="Login"
 						actionListener="#{loginController.init}" update=":mensajes" />
 				</f:facet>
+				<p:commandLink actionListener="#{loginController.account}">
+					<h:outputText value="¿Nuevo Usuario?" />  
+				</p:commandLink>
 			</h:panelGrid>
 		</p:panel>
 	</h:form>

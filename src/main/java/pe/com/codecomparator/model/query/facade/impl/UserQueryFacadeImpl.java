@@ -15,5 +15,15 @@ public class UserQueryFacadeImpl implements UserQueryFacade{
 	public User validateUser(User user) {
 		return userQueryInfrastructureService.validateUser(user);
 	}
+	
+	@Override
+	public User userExists(User user){
+		return userQueryInfrastructureService.userExists(user);
+	}
+
+	@Override
+	public User emailExists(User user) {
+		return userQueryInfrastructureService.emailExists(user);
+	}
 
 }

@@ -11,9 +11,19 @@
 <h:body style="background:url(../img/gallery.jpg);">
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			/*reaction to all events*/
-		});
+	
+	
+		/*$('.start').click(function(){
+			alert("click");
+		});*/
+		/*jQuery(document).ready(function() {
+			
+			$('tr.template-upload').find('td.start').find('button.ui-button').click(function(){
+				alert("click");
+			});
+			
+		});*/
+		
 		function showA() {
 			$("#divA").show();
 		}
@@ -21,24 +31,29 @@
 			$("#step2").show();
 			$("#divB").show();
 		}
-		function showStep2(displayValue) {
-			if (displayValue == "block") {
-				$("#step2").show();
-			} else {
-				alert("error");
-			}
-		}
+		
 		function showCompButton(displayValue) {
 			if (displayValue == "block") {
 				$("#compButton").show();
 			} else {
-				alert("error");
+				alert("error show Comp BUtton");
+			}
+		}
+		function showStep2(displayValue) {
+			console.log("displayValue = "+displayValue);
+			if (displayValue == "block") {
+				$("#step2").show();
+				console.log("show step2");
 			}
 		}
 		/*jQuery(document).ajax(function(){
-			$('tr.template-upload td').css({
-				"font-size":"12px"
-			})
+			function showStep2(displayValue) {
+				console.log("displayValue = "+displayValue);
+				if (displayValue == "block") {
+					$("#step2").show();
+					console.log("show step2");
+				}
+			}
 			
 		});*/
 	</script>
@@ -67,8 +82,8 @@
 				fileUploadListener="#{projectUploadController.uploadProjectA}"
 				allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000" label="Proyecto A"
 				style="font-size:12px; display:none; font-family:monospace"
-				widgetVar="fileUploadComponent"
-				oncomplete="showStep2('#{projectUploadController.display}')" />
+				widgetVar="fileUploadComponent" mode="advanced" oncomplete="showStep2('#{projectUploadController.display}')"/>
+			
 
 		</div>
 		<br></br>

@@ -21,8 +21,6 @@ public class LoginController implements Serializable {
 
 	private static final long serialVersionUID = -25595180939938054L;
 
-	// @Autowired
-	// private UserCommandFacade userCommandFacade;
 	@Autowired
 	private UserQueryFacade userQueryFacade;
 
@@ -69,11 +67,21 @@ public class LoginController implements Serializable {
 					System.out.println(userQueryFacade);
 
 					User obtained = userQueryFacade.validateUser(actualUser);
-					System.out.println("user: " + obtained.getT_username());
-					System.out.println("user: " + obtained.getT_password());
+					
+					if(obtained == null){
+						addWarn(actionEvent, "Cuenta no válida");
+					}else{
+						
+						if(obtained.getT_username().equals(actualUser.getT_username()) &&
+								obtained.getT_password().equals(actualUser.getT_password())){
 
-					FacesContext.getCurrentInstance().getExternalContext()
-							.redirect("/codecomparator/views/uploadPF.xhtml");
+							FacesContext.getCurrentInstance().getExternalContext()
+								.redirect("/codecomparator/views/uploadPF.xhtml");		
+						}
+					/*System.out.println("user: " + obtained.getT_username());
+					System.out.println("user: " + obtained.getT_password());*/
+
+					}
 
 				}
 			}
@@ -88,5 +96,11 @@ public class LoginController implements Serializable {
 						new FacesMessage(FacesMessage.SEVERITY_WARN, "Error:",
 								message));
 	}
+	
+	public void account(ActionEvent actionEvent) throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext()
+		.redirect("/codecomparator/views/account.xhtml");
+	}
+	
 
 }

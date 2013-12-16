@@ -28,6 +28,7 @@ public class ProjectUploadController implements Serializable {
 
 	@Autowired
 	private ProjectCommandFacade projectCommandFacade;
+	
 
 	public void uploadProjectA(FileUploadEvent event) {
 		FacesMessage msg = new FacesMessage("Success! ", event.getFile()
@@ -37,7 +38,9 @@ public class ProjectUploadController implements Serializable {
 			projectCommandFacade.copyProject(firtsProject, event.getFile()
 					.getFileName(), event.getFile().getInputstream(),
 					getPath(URLPROYECTO1));
-			setDisplay("block");
+			if(firtsProject != null){
+				this.setDisplay("block");
+			}
 			System.out.println("result : "+display);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,6 +48,9 @@ public class ProjectUploadController implements Serializable {
 
 	}
 
+	public String updateDisplay(){
+		return getDisplay();
+	}
 	public void uploadProjectB(FileUploadEvent event) {
 		FacesMessage msg = new FacesMessage("Success! ", event.getFile()
 				.getFileName() + " is uploaded.");

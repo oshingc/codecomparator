@@ -4,6 +4,7 @@ public class User {
 
 	private String t_username;
 	private String t_password;
+	private String email;
 	private Integer n_id_user;
 
 	public String getT_username() {
@@ -28,6 +29,14 @@ public class User {
 
 	public void setN_id_usr(Integer n_id_user) {
 		this.n_id_user = n_id_user;
+	}
+
+	public String getT_email() {
+		return email;
+	}
+
+	public void setT_email(String email) {
+		this.email = email;
 	}
 
 }

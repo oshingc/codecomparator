@@ -44,5 +44,8 @@
 	<bean id="projectUploadController"
 		class="pe.com.codecomparator.controller.ProjectUploadController"
 		scope="session" />
+	<bean id="accountController"
+		class="pe.com.codecomparator.controller.AccountController"
+		scope="session" />
 
 </beans>
