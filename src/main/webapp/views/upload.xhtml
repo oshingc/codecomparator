@@ -18,22 +18,22 @@
 			$("#divA").show();
 		}
 		function showB() {
-			$("#step2").show();
+			//$("#step2").show();
 			$("#divB").show();
 		}
-		function showStep2(displayValue) {
-			if (displayValue == "block") {
+		function showStep2(/*displayValue*/) {
+			//if (displayValue == "block") {
 				$("#step2").show();
-			} else {
-				alert("error");
-			}
+			//} else {
+				//alert("error");
+			//}
 		}
-		function showCompButton(displayValue) {
-			if (displayValue == "block") {
+		function showCompButton(/*displayValue*/) {
+			//if (displayValue == "block") {
 				$("#compButton").show();
-			} else {
-				alert("error");
-			}
+			//} else {
+				//alert("error");
+			//}
 		}
 		/*jQuery(document).ajax(function(){
 			$('tr.template-upload td').css({
@@ -49,40 +49,42 @@
 		style="color: #9CB5D6; font-family: monospace; font-size: 18px; font-weight: bold; text-align: center;">
 		Compara proyectos JAVA, visualiza similitudes de código fuente.</p>
 	<p
-		style="background-color: #FFFFFF; color: #00001E; font-size: 15px; font-weight: bold; margin-left: 295px; text-align: center; width: 700px; font-family: monospace;">Realiza
+		style="color: #9CB5D6; font-size: 15px; font-weight: bold; text-align: center; font-family: monospace;">Realiza
 		la carga de dos proyectos locales: Proyecto A y Proyecto B</p>
 	<br></br>
 	<p:growl sticky="true" />
 	<h:form id="form" style="width:700px; margin:0 auto;">
 		<div style="font-family: monospace">
-			<p:commandButton value="PASO 1" oncomplete="showA()"
+			<p:commandButton value="PASO 1"
+				action="#{projectUploadController.resetOne}" ajax="false"
 				title="Carga un proyecto comprimido en formato .zip. Límite de carga 10MB"></p:commandButton>
 		</div>
-		<div id="divA" style="display: none; font-family: monospace;">
-			<div
-				style="font-size: 13px; color: #ededed; margin-top: -28px; margin-right: 13px; text-align: right; font-weight: bold; font-family: monospace;">Carga
-				un proyecto comprimido en formato .zip. Tamaño Max. 10MB.</div>
+		<h:panelGroup
+			rendered="#{projectUploadController.firstFileUpload == true}">
+			<div id="divA" style="display: block; font-family: monospace;">
+				<div
+					style="font-size: 13px; color: #ededed; margin-top: -28px; margin-right: 56px; text-align: right; font-weight: bold; font-family: monospace;">Carga
+					un proyecto comprimido en formato .zip. Tamaño Max. 10MB.</div>
 
-			<br /> <br />
-			<p:fileUpload id="fileUp1"
-				fileUploadListener="#{projectUploadController.uploadProjectA}"
-				allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000" label="Proyecto A"
-				uploadLabel="Subir" cancelLabel="Cancelar"
-				style="font-size:12px; display:none; font-family:monospace"
-				widgetVar="fileUploadComponent"
-				oncomplete="showStep2('#{projectUploadController.display}')" />
+				<br /> <br />
+				<p:fileUpload id="fileUp1"
+					fileUploadListener="#{projectUploadController.uploadProjectA}"
+					allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000"
+					label="Proyecto A" uploadLabel="Subir" cancelLabel="Cancelar"
+					style="font-size:12px; display:none; font-family:monospace"
+					widgetVar="fileUploadComponent" oncomplete="showStep2()" />
 
-		</div>
+			</div>
+		</h:panelGroup>
 		<br></br>
 	</h:form>
 	<h:form style="width:700px; margin:0 auto">
 		<br></br>
-		<div id="step2" style="display: none; font-family: monospace;">
+		<div id="step2" style="font-family: monospace; display: none">
 			<p:commandButton value="PASO 2" oncomplete="showB()"
 				title="Carga un proyecto comprimido en formato .zip. Límite de carga 10MB"></p:commandButton>
 		</div>
-
-		<div id="divB" style="display: none">
+		<div id="divB" style="display: none; font-family: monospace;">
 			<div
 				style="font-size: 13px; color: #ededed; margin-right: 30px; margin-top: -28px; text-align: center; font-weight: bold; font-family: monospace;">
 				Carga tu segundo proyecto comprimido a comparar.</div>
@@ -92,7 +94,7 @@
 				allowTypes="/(\.|\/)(zip)$/" sizeLimit="10000000" label="Proyecto B"
 				uploadLabel="Subir" cancelLabel="Cancelar"
 				style="font-size:12px; font-family:monospace"
-				oncomplete="showCompButton('#{projectUploadController.display}')" />
+				oncomplete="showCompButton()" />
 		</div>
 
 	</h:form>

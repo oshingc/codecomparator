@@ -122,7 +122,7 @@ public class ServiceFileImpl implements ServiceFile {
 	public String getProjectSourcePath(int ideProject,
 			String directoryProjectName) {
 		File directoryProject = new File(directoryProjectName);
-		String sourcePathProject = null;
+		String sourcePathProject = "";
 
 		if (ideProject == CodeComparatorConstants.ECLIPSE_PROJECT) {
 			File xml = null;

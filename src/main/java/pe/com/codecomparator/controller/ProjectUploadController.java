@@ -28,6 +28,8 @@ public class ProjectUploadController implements Serializable {
 
 	// Utilizado para visualizar o no las etiquetas de carga para el segundo
 	// proyecto
+	private boolean firstFileUpload = false;
+	private boolean secondFileUpload = false;
 	private String display = "none";
 
 	@Autowired
@@ -44,12 +46,9 @@ public class ProjectUploadController implements Serializable {
 			projectCommandFacade.copyProject(firtsProject, event.getFile()
 					.getFileName(), event.getFile().getInputstream(),
 					getPath(URLPROYECTO1));
-
-			setDisplay("block");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void uploadProjectB(FileUploadEvent event) {
@@ -66,6 +65,9 @@ public class ProjectUploadController implements Serializable {
 	}
 
 	public void compare() {
+
+		resetAll();
+
 		containers = comparisonCommandFacade.comparisionProject(
 				this.firtsProject, this.secondProject);
 		try {
@@ -76,12 +78,25 @@ public class ProjectUploadController implements Serializable {
 		}
 	}
 
+	private void resetAll() {
+		firstFileUpload = false;
+		secondFileUpload = false;
+	}
+
 	public String getPath(String path) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ServletContext servletContext = (ServletContext) context
 				.getExternalContext().getContext();
 
 		return servletContext.getRealPath(path);
+	}
+
+	public void resetOne() {
+		firstFileUpload = true;
+	}
+
+	public void resetTwo() {
+		secondFileUpload = true;
 	}
 
 	public Project getFirtsProject() {
@@ -108,8 +123,12 @@ public class ProjectUploadController implements Serializable {
 		this.containers = containers;
 	}
 
-	public void setDisplay(String display) {
-		this.display = display;
+	public boolean getFirstFileUpload() {
+		return firstFileUpload;
+	}
+
+	public boolean getSecondFileUpload() {
+		return secondFileUpload;
 	}
 
 	public String getDisplay() {

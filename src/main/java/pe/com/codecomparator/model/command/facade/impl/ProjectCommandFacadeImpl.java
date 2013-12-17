@@ -40,6 +40,7 @@ public class ProjectCommandFacadeImpl implements ProjectCommandFacade {
 		String projectSourcePath = serviceFile.getProjectSourcePath(ideProject,
 				directoryName + CodeComparatorConstants.FORWARDSLASH
 						+ fileNameWithoutExtension);
+
 		projectSourcePath = directoryName
 				+ CodeComparatorConstants.FORWARDSLASH
 				+ fileNameWithoutExtension
