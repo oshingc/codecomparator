@@ -11,7 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="css/main.css" />
 </h:head>
 
-<h:body style="background:url(img/code.jpeg); text-align:center">
+<h:body style="background:url(../img/code.jpeg); text-align:center">
 	<hr />
 	<br />
 	<br />
@@ -21,7 +21,8 @@
 	<p:growl id="mensajes" showDetail="true" sticky="true" />
 	<h:form>
 		<h1 style="color: #ededed;">CodeComparator v0.1</h1>
-		<p:panel header="Inicio de Sesión" styleClass="panel-login">
+		<p:panel header="Inicio de Sesión"
+			style="margin: 0 auto; position: relative; width: 382px">
 			<h:panelGrid columns="2" cellpadding="4">
 				<h:outputLabel for="username" value="Username" />
 				<p:inputText id="username" value="#{loginController.username}" />
@@ -44,7 +45,7 @@
     if (!args.validationFailed && args.estaLogeado) {
       setTimeout(function() {
         window.location = args.view;
-      }, 500);
+      }, 1000);
     }
   }
 //]]>

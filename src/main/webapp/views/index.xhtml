@@ -7,33 +7,37 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<title>CodeComparator v0.1</title>
 </h:head>
-<h:body>
-	<h4>JSF Puro</h4>
-	<a href="views/upload.xhtml">Upload.xhtml</a>
-	<a href="views/uploadPF.xhtml">Upload.xhtml</a>
-	<h:form id="jsfForm">
-		<h:inputText id="name" value="#{mc.jsfName}" />
-		<h:commandButton value="Di Hola">
-			<f:ajax execute="name" render=":jsfForm:group" />
-		</h:commandButton>
-		<br />
-		<h:panelGroup id="group">
-			<h:outputText value="¡¡¡ HOLA #{mc.jsfName} !!!"
-				rendered="#{not empty mc.jsfName}" />
-		</h:panelGroup>
-	</h:form>
-	<hr />
-	<h4>PrimeFaces</h4>
-	<h:form id="primeForm">
-		<p:inputText id="name" value="#{mc.primeName}">
-			<p:ajax event="keyup" process="@this" update=":primeForm:nameGroup" />
-		</p:inputText>
-		<h:panelGroup id="nameGroup">
-			<h:outputText value="Hi #{mc.primeName}!!"
-				rendered="#{not empty mc.primeName}" />
-		</h:panelGroup>
-	</h:form>
+<h:body style="background:url(img/stars.jpg); text-align:center">
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<table style="margin: 0 auto; position: relative;">
+		<tr>
+			<td style="text-align: center; color: #ededed; font-size: 100px"><p:outputLabel
+					style="text-align: center; color: #ededed; font-size: 100px"
+					onclick="toLogin()">Code</p:outputLabel></td>
+		</tr>
+		<tr>
+			<td style="text-align: center; color: #ededed; font-size: 100px"><p:outputLabel
+					style="text-align: center; color: #ededed; font-size: 100px"
+					onclick="toLogin()">Comparator</p:outputLabel></td>
+		</tr>
+		<tr>
+			<td style="text-align: center; color: #ededed; font-size: 100px"><p:outputLabel
+					style="text-align: center; color: #ededed; font-size: 100px"
+					onclick="toLogin()">v0.1</p:outputLabel></td>
+		</tr>
+	</table>
 </h:body>
-
+<script type="text/javascript">
+  function toLogin() {
+      setTimeout(function() {
+        window.location = 'http://localhost:8080/codecomparator/views/login.xhtml';
+      }, 100);
+  }
+</script>
 </html>

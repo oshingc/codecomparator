@@ -73,7 +73,8 @@ public class LoginController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		context.addCallbackParam("estaLogeado", login);
 		if (login)
-			context.addCallbackParam("view", "views/upload.xhtml");
+			context.addCallbackParam("view",
+					"/codecomparator/views/upload.xhtml");
 	}
 
 	public void logout() throws IOException {
