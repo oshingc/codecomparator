@@ -1,6 +1,7 @@
 package pe.com.codecomparator.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 //import javax.faces.application.FacesMessage;
@@ -22,15 +23,14 @@ public class ProjectUploadController implements Serializable {
 	private static final String URLPROYECTO1 = "/projects/one/";
 	private static final String URLPROYECTO2 = "/projects/two/";
 
-	private Project firtsProject = new Project();
+	private Project firstProject = new Project();
 	private Project secondProject = new Project();
-	private List<ContainerChartResult> containers;
+	private List<ContainerChartResult> containers = new ArrayList<>();
 
 	// Utilizado para visualizar o no las etiquetas de carga para el segundo
 	// proyecto
 	private boolean firstFileUpload = false;
 	private boolean secondFileUpload = false;
-	private String display = "none";
 
 	@Autowired
 	private ProjectCommandFacade projectCommandFacade;
@@ -42,8 +42,9 @@ public class ProjectUploadController implements Serializable {
 		// FacesMessage msg = new FacesMessage("Success! ", event.getFile()
 		// .getFileName() + " is uploaded.");
 		// FacesContext.getCurrentInstance().addMessage(null, msg);
+		firstProject = new Project();
 		try {
-			projectCommandFacade.copyProject(firtsProject, event.getFile()
+			projectCommandFacade.copyProject(firstProject, event.getFile()
 					.getFileName(), event.getFile().getInputstream(),
 					getPath(URLPROYECTO1));
 		} catch (Exception e) {
@@ -55,6 +56,7 @@ public class ProjectUploadController implements Serializable {
 		// FacesMessage msg = new FacesMessage("Success! ", event.getFile()
 		// .getFileName() + " is uploaded.");
 		// FacesContext.getCurrentInstance().addMessage(null, msg);
+		secondProject = new Project();
 		try {
 			projectCommandFacade.copyProject(secondProject, event.getFile()
 					.getFileName(), event.getFile().getInputstream(),
@@ -65,11 +67,11 @@ public class ProjectUploadController implements Serializable {
 	}
 
 	public void compare() {
-
 		resetAll();
 
+		containers = new ArrayList<>();
 		containers = comparisonCommandFacade.comparisionProject(
-				this.firtsProject, this.secondProject);
+				this.firstProject, this.secondProject);
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("/codecomparator/views/reports.xhtml");
@@ -78,6 +80,7 @@ public class ProjectUploadController implements Serializable {
 		}
 	}
 
+	// Restaura a false los booleanos que renderizan etiquetas de las vistas
 	private void resetAll() {
 		firstFileUpload = false;
 		secondFileUpload = false;
@@ -99,12 +102,12 @@ public class ProjectUploadController implements Serializable {
 		secondFileUpload = true;
 	}
 
-	public Project getFirtsProject() {
-		return firtsProject;
+	public Project getFirstProject() {
+		return firstProject;
 	}
 
-	public void setFirtsProject(Project firtsProject) {
-		this.firtsProject = firtsProject;
+	public void setFirstProject(Project firstProject) {
+		this.firstProject = firstProject;
 	}
 
 	public Project getSecondProject() {
@@ -129,10 +132,6 @@ public class ProjectUploadController implements Serializable {
 
 	public boolean getSecondFileUpload() {
 		return secondFileUpload;
-	}
-
-	public String getDisplay() {
-		return display;
 	}
 
 }

@@ -1,8 +1,5 @@
 package pe.com.codecomparator.model.command.application.service.impl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,35 +20,11 @@ public class ServiceComparisonImpl implements ServiceComparison {
 	private FDTW fdtw = new FDTW();
 
 	public Double compareFiles(Code code1, Code code2) {
-
-		/*
-		 * BufferedReader code1 = getCodeFile(file1); BufferedReader code2 =
-		 * getCodeFile(file2); codeconverter = new CodeConverter();
-		 * codeconverter.setFile(code1);
-		 * codeconverter.TransformCodeOperatorLevel(); Double[] d1 =
-		 * codeconverter.Q; codeconverter = new CodeConverter();
-		 * codeconverter.setFile(code2);
-		 * codeconverter.TransformCodeOperatorLevel(); Double[] d2 =
-		 * codeconverter.Q;
-		 */
 		fdtw = new FDTW();
 		fdtw.SetSequences(code1.getQ(), code2.getQ());
 		Double a = fdtw.GetDistance();
 
 		return a;
-	}
-
-	public BufferedReader getCodeFile(File file) {
-		FileReader fr = null;
-		BufferedReader br = null;
-		try {
-			fr = new FileReader(file);
-			br = new BufferedReader(fr);
-
-		} catch (Exception e) {
-			return null;
-		}
-		return br;
 	}
 
 	public List<ContainerChartResult> comparisionProject(Project project1,
@@ -80,8 +53,8 @@ public class ServiceComparisonImpl implements ServiceComparison {
 			container.setFdtw(String.valueOf(this.min));
 			container.setNameFirstProyect(project1.getName());
 			container.setNameSecondProyect(project2.getName());
-			container.setChartOne(this.generateGrafic(code1));
-			container.setChartTwo(this.generateGrafic(this.code2));
+			container.setChartOne(this.generateGraphic(code1));
+			container.setChartTwo(this.generateGraphic(this.code2));
 			containers.add(container);
 		}
 
@@ -108,8 +81,8 @@ public class ServiceComparisonImpl implements ServiceComparison {
 			container.setNameFirstProyect(project1.getName());
 			container.setNameSecondProyect(project2.getName());
 
-			container.setChartOne(this.generateGrafic(code1));
-			container.setChartTwo(this.generateGrafic(this.code2));
+			container.setChartOne(this.generateGraphic(code1));
+			container.setChartTwo(this.generateGraphic(this.code2));
 
 			containers.add(container);
 
@@ -161,7 +134,7 @@ public class ServiceComparisonImpl implements ServiceComparison {
 
 	}
 
-	public CartesianChartModel generateGrafic(Code code) {
+	public CartesianChartModel generateGraphic(Code code) {
 		CartesianChartModel chart = new CartesianChartModel();
 		ChartSeries value = new ChartSeries();
 		// value.setLabel(code.getName());

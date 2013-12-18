@@ -11,36 +11,15 @@
 <h:body style="background:url(../img/gallery.jpg);">
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			/*reaction to all events*/
-		});
-		function showA() {
-			$("#divA").show();
-		}
 		function showB() {
-			//$("#step2").show();
 			$("#divB").show();
 		}
-		function showStep2(/*displayValue*/) {
-			//if (displayValue == "block") {
-				$("#step2").show();
-			//} else {
-				//alert("error");
-			//}
+		function showStep2() {
+			$("#step2").show();
 		}
-		function showCompButton(/*displayValue*/) {
-			//if (displayValue == "block") {
-				$("#compButton").show();
-			//} else {
-				//alert("error");
-			//}
+		function showCompButton() {
+			$("#compButton").show();
 		}
-		/*jQuery(document).ajax(function(){
-			$('tr.template-upload td').css({
-				"font-size":"12px"
-			})
-			
-		});*/
 	</script>
 
 
@@ -48,9 +27,11 @@
 	<p
 		style="color: #9CB5D6; font-family: monospace; font-size: 18px; font-weight: bold; text-align: center;">
 		Compara proyectos JAVA, visualiza similitudes de código fuente.</p>
-	<p
-		style="color: #9CB5D6; font-size: 15px; font-weight: bold; text-align: center; font-family: monospace;">Realiza
-		la carga de dos proyectos locales: Proyecto A y Proyecto B</p>
+	<h:panelGroup id="pg">
+		<p
+			style="color: #9CB5D6; font-size: 15px; font-weight: bold; text-align: center; font-family: monospace;">Realiza
+			la carga de dos proyectos locales: Proyecto A y Proyecto B</p>
+	</h:panelGroup>
 	<br></br>
 	<p:growl sticky="true" />
 	<h:form id="form" style="width:700px; margin:0 auto;">

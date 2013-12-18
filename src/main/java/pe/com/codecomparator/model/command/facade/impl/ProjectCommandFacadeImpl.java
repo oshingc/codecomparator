@@ -48,24 +48,6 @@ public class ProjectCommandFacadeImpl implements ProjectCommandFacade {
 
 		project.setName(fileNameWithoutExtension);
 		serviceProject.populateProject(project, projectSourcePath);
-
-		// System.out.println(project.getPackages());
-
-		// TODO eliminar este recorrido, sólo útil para ver los archivos java en
-		// el directorio del proyecto
-		// ArrayList<File> filesProyecto1 = new ArrayList<File>();
-		// serviceFile.listf(directoryName, filesProyecto1,
-		// CodeComparatorConstants.JAVA_FILE_EXTENSION);
-		//
-		// System.out.println("Archivos java del proyecto:");
-		// for (File file : filesProyecto1) {
-		// System.out.println(file.getName());
-		// System.out.println(file.getAbsolutePath());
-		// System.out.println();
-		//
-		// }
-		//
-		// System.out.println("New file created!");
 	}
 
 }

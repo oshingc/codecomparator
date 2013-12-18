@@ -21,7 +21,12 @@
 	<h1 style="color: #ededed;">CodeComparator v0.1</h1>
 	<p
 		style="color: #9CB5D6; font-family: monospace; font-size: 18px; font-weight: bold; text-align: center;">
-		Resultado de comparación</p>
+		Resultados de comparación</p>
+	<div style="width: 100%">
+		<p:button value="Regresar" icon="ui-icon-arrowreturnthick-1-w"
+			href="/views/upload.xhtml"
+			style="float: left; margin-bottom: 8px; font-size: 14px" />
+	</div>
 	<p:dataTable var="container" value="#{reportController.containers}">
 		<p:column headerText="Códigos Fuente">
 			<p:panelGrid columns="1">

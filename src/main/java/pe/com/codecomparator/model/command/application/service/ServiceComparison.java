@@ -1,7 +1,5 @@
 package pe.com.codecomparator.model.command.application.service;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.util.List;
 
 import org.primefaces.model.chart.CartesianChartModel;
@@ -21,8 +19,6 @@ public interface ServiceComparison {
 	public List<ContainerChartResult> comparisionProject(Project project1,
 			Project project2);
 
-	public BufferedReader getCodeFile(File file);
-
-	public CartesianChartModel generateGrafic(Code code);
+	public CartesianChartModel generateGraphic(Code code);
 
 }
