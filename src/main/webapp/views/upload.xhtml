@@ -21,7 +21,12 @@
 			$("#compButton").show();
 		}
 	</script>
-
+	<h:form>
+		<p:commandLink id="logout" actionListener="#{loginController.logout}"
+			style="margin-right:20px;">
+			<h:outputText value="logout" />
+		</p:commandLink>
+	</h:form>
 
 	<h1 style="color: #ededed; text-align: center">CodeComparator v0.1</h1>
 	<p
@@ -93,4 +98,12 @@
 		</div>
 	</h:form>
 </h:body>
+<script type="text/javascript">
+   //<![CDATA[
+   function logout(xhr, status, args) {
+     setTimeout(function() {
+       window.location = '';
+     }, 500);
+   }
+ //]]> </script>
 </html>

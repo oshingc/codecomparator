@@ -31,11 +31,22 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Login"
-						actionListener="#{loginController.init}" update=":mensajes" />
+						actionListener="#{loginController.login}" update=":mensajes"
+						oncomplete="manejarLogin(xhr, status, args)" />
 				</f:facet>
 			</h:panelGrid>
 		</p:panel>
 	</h:form>
 </h:body>
-
+<script type="text/javascript">
+  //<![CDATA[
+  function manejarLogin(xhr, status, args) {
+    if (!args.validationFailed && args.estaLogeado) {
+      setTimeout(function() {
+        window.location = args.view;
+      }, 500);
+    }
+  }
+//]]>
+</script>
 </html>

@@ -9,7 +9,9 @@ import javax.faces.application.FacesMessage.Severity;
 //import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pe.com.codecomparator.domain.User;
@@ -30,6 +32,8 @@ public class LoginController implements Serializable {
 	private String username;
 	private String password;
 
+	private boolean login = false;
+
 	public LoginController() {
 	}
 
@@ -47,6 +51,39 @@ public class LoginController implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean getLogin() {
+		return login;
+	}
+
+	public void login(ActionEvent actionEvent) {
+		RequestContext context = RequestContext.getCurrentInstance();
+		FacesMessage msg = null;
+		if (username != null && username.equals("admin") && password != null
+				&& password.equals("admin")) {
+			login = true;
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
+					username);
+		} else {
+			login = false;
+			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+					"Credenciales no válidas");
+		}
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		context.addCallbackParam("estaLogeado", login);
+		if (login)
+			context.addCallbackParam("view", "views/upload.xhtml");
+	}
+
+	public void logout() throws IOException {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.invalidate();
+		login = false;
+
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("/codecomparator/");
 	}
 
 	public void init(ActionEvent actionEvent) throws IOException {
