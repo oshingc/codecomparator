@@ -23,7 +23,8 @@
 	</script>
 	<h:form>
 		<p:commandLink id="logout" actionListener="#{loginController.logout}"
-			style="margin-right:20px;">
+			style="font-size: 13px; font-family: monospace; color: #9cb5d6; font-weight: bold;"
+			shape="circle">
 			<h:outputText value="logout" />
 		</p:commandLink>
 	</h:form>
@@ -99,11 +100,9 @@
 	</h:form>
 </h:body>
 <script type="text/javascript">
-   //<![CDATA[
    function logout(xhr, status, args) {
      setTimeout(function() {
        window.location = '';
      }, 500);
-   }
- //]]> </script>
+   }</script>
 </html>

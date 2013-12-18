@@ -18,6 +18,13 @@
 	opacity: 0.95;
 }
 </style>
+	<h:form>
+		<p:commandLink id="logout" actionListener="#{loginController.logout}"
+			style="font-size: 13px; font-family: monospace; color: #9cb5d6; font-weight: bold; padding-left: 93%"
+			shape="circle">
+			<h:outputText value="logout" />
+		</p:commandLink>
+	</h:form>
 	<h1 style="color: #ededed;">CodeComparator v0.1</h1>
 	<p
 		style="color: #9CB5D6; font-family: monospace; font-size: 18px; font-weight: bold; text-align: center;">

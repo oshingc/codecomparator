@@ -37,6 +37,84 @@ public class LoginController implements Serializable {
 	public LoginController() {
 	}
 
+	public void login(ActionEvent actionEvent) {
+		RequestContext context = RequestContext.getCurrentInstance();
+		FacesMessage msg = null;
+		if (username != null && username.equals("admin") && password != null
+				&& password.equals("admin")) {
+			login = true;
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
+					username);
+		} else {
+			login = false;
+			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+					"Credenciales no válidas");
+		}
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		context.addCallbackParam("login", login);
+		if (login)
+			context.addCallbackParam("view",
+					"/codecomparator/views/upload.xhtml");
+	}
+
+	public void logout() throws IOException {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.invalidate();
+		login = false;
+
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("/codecomparator/");
+	}
+
+	public void init(ActionEvent actionEvent) throws IOException {
+		RequestContext context = RequestContext.getCurrentInstance();
+
+		if (this.username.equals("") && this.password.equals("")) {
+			login = false;
+			addWarn(FacesMessage.SEVERITY_WARN, "Complete todos los campos");
+		} else {
+			if (this.password.equals("")) {
+				login = false;
+				addWarn(FacesMessage.SEVERITY_WARN, "Ingrese una contraseña");
+			} else {
+				if (this.username.equals("")) {
+					login = false;
+					addWarn(FacesMessage.SEVERITY_WARN,
+							"Ingrese nombre de usuario");
+				} else {
+					// Cotejar el usuario con los registrados en la base de
+					// datos
+					User actualUser = new User();
+					actualUser.setT_username(username);
+					actualUser.setT_password(password);
+
+					User obtained = userQueryFacade.validateUser(actualUser);
+					if (obtained == null) {
+						login = false;
+						addWarn(FacesMessage.SEVERITY_ERROR,
+								"Usuario no registrado");
+					} else {
+						login = true;
+						addWarn(FacesMessage.SEVERITY_INFO,
+								obtained.getT_username());
+						context.addCallbackParam("login", login);
+						context.addCallbackParam("view",
+								"/codecomparator/views/upload.xhtml");
+					}
+				}
+			}
+		}
+	}
+
+	public void addWarn(Severity severity, String message) {
+		String summary = (severity.equals(FacesMessage.SEVERITY_INFO)) ? "Bienvenid@:"
+				: (severity.equals(FacesMessage.SEVERITY_WARN)) ? "Advertencia:"
+						: "Error:";
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(severity, summary, message));
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -55,79 +133,6 @@ public class LoginController implements Serializable {
 
 	public boolean getLogin() {
 		return login;
-	}
-
-	public void login(ActionEvent actionEvent) {
-		RequestContext context = RequestContext.getCurrentInstance();
-		FacesMessage msg = null;
-		if (username != null && username.equals("admin") && password != null
-				&& password.equals("admin")) {
-			login = true;
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
-					username);
-		} else {
-			login = false;
-			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-					"Credenciales no válidas");
-		}
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		context.addCallbackParam("estaLogeado", login);
-		if (login)
-			context.addCallbackParam("view",
-					"/codecomparator/views/upload.xhtml");
-	}
-
-	public void logout() throws IOException {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
-		session.invalidate();
-		login = false;
-
-		FacesContext.getCurrentInstance().getExternalContext()
-				.redirect("/codecomparator/");
-	}
-
-	public void init(ActionEvent actionEvent) throws IOException {
-		System.out.println("LoginController.init()");
-		if (this.username.equals("") && this.password.equals("")) {
-			addWarn(FacesMessage.SEVERITY_WARN, "Complete todos los campos");
-		} else {
-			if (this.password.equals("")) {
-				addWarn(FacesMessage.SEVERITY_WARN, "Ingrese una contraseña");
-			} else {
-				if (this.username.equals("")) {
-					addWarn(FacesMessage.SEVERITY_WARN,
-							"Ingrese nombre de usuario");
-
-				} else {
-					// Cotejar el usuario con los registrados en la base de
-					// datos
-					User actualUser = new User();
-					actualUser.setT_username(username);
-					actualUser.setT_password(password);
-
-					User obtained = userQueryFacade.validateUser(actualUser);
-
-					if (obtained == null)
-						addWarn(FacesMessage.SEVERITY_ERROR,
-								"Usuario no registrado");
-					else {
-						System.out.println(obtained);
-						System.out.println("user: " + obtained.getT_username());
-						System.out.println("user: " + obtained.getT_password());
-
-						FacesContext.getCurrentInstance().getExternalContext()
-								.redirect("/codecomparator/views/upload.xhtml");
-					}
-				}
-			}
-
-		}
-	}
-
-	public void addWarn(Severity severity, String message) {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(severity, "Error:", message));
 	}
 
 }
