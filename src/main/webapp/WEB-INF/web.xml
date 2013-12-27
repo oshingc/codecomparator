@@ -73,12 +73,12 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <filter>
-    <display-name>LoginFiler</display-name>
-    <filter-name>LoginFiler</filter-name>
-    <filter-class>pe.com.codecomparator.controller.filter.LoginFiler</filter-class>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>pe.com.codecomparator.controller.filter.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>LoginFiler</filter-name>
+    <filter-name>LoginFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 </web-app>
