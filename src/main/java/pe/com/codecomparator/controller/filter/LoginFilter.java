@@ -63,6 +63,8 @@ public class LoginFilter implements Filter {
 			return true;
 		if (urlStr.endsWith("code.jpeg"))
 			return true;
+		if (urlStr.endsWith("forgot_password.png"))
+			return true;
 		if (urlStr.endsWith("login.xhtml"))
 			return true;
 		if (urlStr.indexOf("/javax.faces.resource/") != -1)

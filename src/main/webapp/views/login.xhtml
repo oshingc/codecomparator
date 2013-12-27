@@ -9,6 +9,45 @@
 <h:head>
 	<title>CodeComparator v0.1 - Inicio de Sesión</title>
 	<link type="text/css" rel="stylesheet" href="css/main.css" />
+	<style>
+.input_username_password {
+	border-radius: 8px;
+	height: 30px;
+	width: 200px;
+}
+
+.button_login {
+	width: 100%;
+	font-size: 17px;
+	font-weight: normal;
+	border-radius: 8px;
+	background: #529E81;
+	border: 0px;
+	color: white;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+.link_forgot_password {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: url(../img/forgot_password.png) 50% 50% no-repeat;
+	top: calc(34%);
+	right: calc(15%);
+	margin: -8px 0 0 0;
+	border-radius: 50%;
+	overflow: hidden
+}
+
+.link_register {
+	text-decoration: none;
+	color: #fff;
+	opacity: .87;
+	font-size: 12px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+</style>
 </h:head>
 
 <h:body style="background:url(../img/code.jpeg); text-align:center">
@@ -21,22 +60,49 @@
 	<p:growl id="mensajes" showDetail="true" sticky="true" />
 	<h:form>
 		<h1 style="color: #ededed;">CodeComparator v0.1</h1>
-		<p:panel header="Inicio de Sesión"
-			style="margin: 0 auto; position: relative; width: 382px">
-			<h:panelGrid columns="2" cellpadding="4">
-				<h:outputLabel for="username" value="Username" />
-				<p:inputText id="username" value="#{loginController.username}" />
-
-				<h:outputLabel for="password" value="Password" />
-				<p:password id="password" value="#{loginController.password}" />
-
-				<f:facet name="footer">
-					<p:commandButton value="Login"
-						actionListener="#{loginController.init}" update=":mensajes"
-						oncomplete="manejarLogin(xhr, status, args)" />
-				</f:facet>
-			</h:panelGrid>
-		</p:panel>
+		<div
+			style="margin: 0 auto; position: relative; width: 220px; padding: 0px 30px 30px;">
+			<table>
+				<tbody>
+					<tr>
+						<td><div>
+								<p:inputText id="username" value="#{loginController.username}"
+									styleClass="input_username_password" />
+								<p:watermark value="Usuario" for="username" />
+							</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<p:password id="password" value="#{loginController.password}"
+									styleClass="input_username_password">
+									<a href="#" title="Recuperar contraseña ... pronto"
+										class="link_forgot_password"></a>
+								</p:password>
+								<p:watermark value="Password" for="password" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<p:commandButton value="Iniciar Sesión"
+									actionListener="#{loginController.init}" update=":mensajes"
+									oncomplete="manejarLogin(xhr, status, args)"
+									styleClass="button_login" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><div>
+								<br />
+								<p:commandLink styleClass="link_register" title="... pronto">
+									<strong>Registrarse</strong> para crear cuenta</p:commandLink>
+							</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</h:form>
 </h:body>
 <script type="text/javascript">
