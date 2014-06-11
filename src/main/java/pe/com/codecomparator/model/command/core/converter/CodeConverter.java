@@ -44,15 +44,8 @@ public class CodeConverter {
 	private void RemoveComments() {
 		String line = "--";
 		try {
-			// using(StreamReader sr = new StreamReader(file))
-			// BufferedReader br = loadSourceCode();
 			BufferedReader br = file;
-			// StreamReader sr = new StreamReader(file);
-			// while (!sr.EndOfStream) {
 			while ((line = br.readLine()) != null) {
-				// System.out.println("::::::::::" + line);
-
-				// String line = sr.ReadLine();
 				int index;
 				// Es comentario simple
 				if (line.contains("//")) {
@@ -78,8 +71,6 @@ public class CodeConverter {
 				}
 				// Dividir las líneas de código en instrucciones
 				String[] se = new String[] { "\t", "\n", "\r", ";" };
-				// String[] tokens = line.split(se,
-				// StringSplitOptions.RemoveEmptyEntries);
 				String[] tokens = split(line, se);
 				for (String token : tokens) {
 					if (!token.equals("")) {
@@ -88,9 +79,6 @@ public class CodeConverter {
 				}
 			}
 		} catch (Exception e) {
-			System.out
-					.println("Ocurrió un error en la lectura del archivo en la línea :: \n"
-							+ line);
 			e.printStackTrace();
 		}
 	}

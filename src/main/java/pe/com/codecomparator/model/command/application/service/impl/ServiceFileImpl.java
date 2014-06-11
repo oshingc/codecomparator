@@ -85,8 +85,6 @@ public class ServiceFileImpl implements ServiceFile {
 
 				if (file.isDirectory()) {
 					deleteDirectory(file);
-				} else if (!file.delete()) {
-					System.out.println("Failed to delete " + file);
 				}
 			}
 		}

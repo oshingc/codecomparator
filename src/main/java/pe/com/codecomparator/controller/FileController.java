@@ -34,27 +34,22 @@ public class FileController implements Serializable {
 	private ServiceFile f = new ServiceFileImpl();
 
 	public Part getFile1() {
-		System.out.println("FileController.getFile1()");
 		return file1;
 	}
 
 	public void setFile1(Part file1) {
-		System.out.println("FileController.setFile1()");
 		this.file1 = file1;
 	}
 
 	public Part getFile2() {
-		System.out.println("FileController.getFile2()");
 		return file2;
 	}
 
 	public void setFile2(Part file2) {
-		System.out.println("FileController.setFile2()");
 		this.file2 = file2;
 	}
 
 	public String upload() throws IOException {
-		System.out.println("FileController.upload()");
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		ServletContext servletContext = (ServletContext) context
@@ -66,11 +61,8 @@ public class FileController implements Serializable {
 		f.deleteContentFolder(folderProyecto1);
 		f.deleteContentFolder(folderProyecto2);
 
-		System.out.println(file1.getName());
-
 		String archivoProyecto1 = servletContext.getRealPath(URLPROYECTO1
 				+ f.getFilename(file1));
-		System.out.println();
 		String archivoProyecto2 = servletContext.getRealPath(URLPROYECTO2
 				+ f.getFilename(file2));
 
@@ -83,30 +75,13 @@ public class FileController implements Serializable {
 		ArrayList<File> filesProyecto1 = new ArrayList<File>();
 		f.listf(folderProyecto1, filesProyecto1, ".java");
 
-		System.out.println("Archivos java del proyecto 1");
-		for (File file : filesProyecto1) {
-			System.out.println(file.getName());
-			System.out.println(file.getAbsolutePath());
-			System.out.println();
-
-		}
-
 		ArrayList<File> filesProyecto2 = new ArrayList<File>();
 		f.listf(folderProyecto2, filesProyecto2, ".java");
-
-		System.out.println("Archivos java del proyecto 2");
-		for (File file : filesProyecto2) {
-			System.out.println(file.getName());
-			System.out.println(file.getAbsolutePath());
-			System.out.println();
-
-		}
 
 		return "success";
 	}
 
 	public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
-		System.out.println("FileController.validateFile()");
 		ArrayList<FacesMessage> msgs = new ArrayList<FacesMessage>();
 		Part file = (Part) value;
 		String filename = f.getFilename(file);
@@ -120,10 +95,6 @@ public class FileController implements Serializable {
 
 			throw new ValidatorException(msgs);
 		}
-	}
-
-	public void serve() {
-		System.out.println("FileController.serve()");
 	}
 
 }

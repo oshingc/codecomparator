@@ -96,8 +96,6 @@ public class ServiceProjectImpl implements ServiceProject {
 					.getFile()));
 			converter.TransformCodeOperatorLevel();
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al convertir el código :: \n");
-			System.out.println(code.getFile().getName());
 			e.printStackTrace();
 		}
 		return converter.Q;
