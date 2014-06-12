@@ -11,7 +11,7 @@ public interface ServiceProject {
 	public int checkIdeToBuildProject(String directoryName);
 
 	/**
-	 * Método que se encarga de poblar un objeto {@link domain.Project}
+	 * Método que se encarga de poblar un objeto {@link pe.com.codecomparator.domain.Project}
 	 * */
 	public void populateProject(Project project, String directoryName);
 

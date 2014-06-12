@@ -39,9 +39,6 @@ public class ProjectUploadController implements Serializable {
 	private ComparisonCommandFacade comparisonCommandFacade;
 
 	public void uploadProjectA(FileUploadEvent event) {
-		// FacesMessage msg = new FacesMessage("Success! ", event.getFile()
-		// .getFileName() + " is uploaded.");
-		// FacesContext.getCurrentInstance().addMessage(null, msg);
 		firstProject = new Project();
 		try {
 			projectCommandFacade.copyProject(firstProject, event.getFile()
@@ -53,9 +50,6 @@ public class ProjectUploadController implements Serializable {
 	}
 
 	public void uploadProjectB(FileUploadEvent event) {
-		// FacesMessage msg = new FacesMessage("Success! ", event.getFile()
-		// .getFileName() + " is uploaded.");
-		// FacesContext.getCurrentInstance().addMessage(null, msg);
 		secondProject = new Project();
 		try {
 			projectCommandFacade.copyProject(secondProject, event.getFile()
@@ -66,6 +60,10 @@ public class ProjectUploadController implements Serializable {
 		}
 	}
 
+	/**
+	 * Método que se encarga de comparar ambos proyectos almacenados en el
+	 * servidor
+	 */
 	public void compare() {
 		resetAll();
 
@@ -80,7 +78,9 @@ public class ProjectUploadController implements Serializable {
 		}
 	}
 
-	// Restaura a false los booleanos que renderizan etiquetas de las vistas
+	/**
+	 * Restaura a false los booleanos que renderizan etiquetas de las vistas
+	 */
 	private void resetAll() {
 		firstFileUpload = false;
 		secondFileUpload = false;

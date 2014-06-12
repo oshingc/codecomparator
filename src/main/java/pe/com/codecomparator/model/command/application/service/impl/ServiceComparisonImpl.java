@@ -41,19 +41,19 @@ public class ServiceComparisonImpl implements ServiceComparison {
 		ArrayList<Package> packages = (ArrayList<Package>) project1
 				.getPackages();
 
-		for (Code code1 : codes) {
+		for (Code code : codes) {
 			this.code2 = new Code();
 			this.min = new Double(Double.MAX_VALUE);
-			travelComparisionMinProject(project2, code1);
+			travelComparisionMinProject(project2, code);
 
 			ContainerChartResult container = new ContainerChartResult();
 
-			container.setCodeFirstProyect(code1);
+			container.setCodeFirstProyect(code);
 			container.setCodeSecondProyect(this.code2);
 			container.setFdtw(String.valueOf(this.min));
 			container.setNameFirstProyect(project1.getName());
 			container.setNameSecondProyect(project2.getName());
-			container.setChartOne(this.generateGraphic(code1));
+			container.setChartOne(this.generateGraphic(code));
 			container.setChartTwo(this.generateGraphic(this.code2));
 			containers.add(container);
 		}
@@ -70,18 +70,18 @@ public class ServiceComparisonImpl implements ServiceComparison {
 		ArrayList<Package> packages = (ArrayList<Package>) package1
 				.getPackages();
 
-		for (Code code1 : codes) {
+		for (Code code : codes) {
 			this.code2 = new Code();
 			this.min = new Double(Double.MAX_VALUE);
-			travelComparisionMinProject(project2, code1);
+			travelComparisionMinProject(project2, code);
 			ContainerChartResult container = new ContainerChartResult();
-			container.setCodeFirstProyect(code1);
+			container.setCodeFirstProyect(code);
 			container.setCodeSecondProyect(this.code2);
 			container.setFdtw(String.valueOf(this.min));
 			container.setNameFirstProyect(project1.getName());
 			container.setNameSecondProyect(project2.getName());
 
-			container.setChartOne(this.generateGraphic(code1));
+			container.setChartOne(this.generateGraphic(code));
 			container.setChartTwo(this.generateGraphic(this.code2));
 
 			containers.add(container);

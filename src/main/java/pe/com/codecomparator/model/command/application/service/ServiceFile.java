@@ -21,6 +21,12 @@ public interface ServiceFile {
 	public void writeContentFolder(String fileName, InputStream inputStream,
 			String directoryName);
 
+	/**
+	 * Borra recursivamente el contenido de una carpeta.
+	 * 
+	 * @param path
+	 *            ruta de la carpeta
+	 */
 	public void deleteContentFolder(String path);
 
 	public boolean deleteDirectory(File path);
@@ -32,9 +38,9 @@ public interface ServiceFile {
 	 * proyecto
 	 * 
 	 * @param ideProject
-	 *            int que identifica el tipo de IDE
+	 *            <code>int</code> que identifica el tipo de IDE
 	 * @param directoryProjectName
-	 *            String que contiene la ruta del proyecto
+	 *            <code>String</code> que contiene la ruta del proyecto
 	 * */
 	public String getProjectSourcePath(int ideProject,
 			String directoryProjectName);
