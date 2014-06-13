@@ -19,9 +19,9 @@ public class CodeConverter {
 		String[] words = null;
 		ArrayList<String> temp = new ArrayList<>();
 		for (String separator : separators) {
-			value = value.replaceAll(separator, "Â¬");
+			value = value.replaceAll(separator, "¬");
 		}
-		words = value.split("Â¬");
+		words = value.split("¬");
 		for (String word : words) {
 			if (!word.isEmpty())
 				temp.add(word);
@@ -52,7 +52,7 @@ public class CodeConverter {
 					index = line.indexOf("//");
 					line = line.substring(0, index);
 				}
-				// Es comentario mÃºltiple
+				// Es comentario multiple
 				else if (line.contains("/*")) {
 					index = line.indexOf("/*");
 					while (!line.contains("*/")) {
@@ -69,7 +69,7 @@ public class CodeConverter {
 								+ line.substring(0 + (index2 + 2));
 					}
 				}
-				// Dividir las lÃ­neas de cÃ³digo en instrucciones
+				// Dividir las lineas de codigo en instrucciones
 				String[] se = new String[] { "\t", "\n", "\r", ";" };
 				String[] tokens = split(line, se);
 				for (String token : tokens) {
@@ -145,16 +145,16 @@ public class CodeConverter {
 						operaciones = operaciones.substring(0, ind)
 								+ operaciones.substring(ind
 										+ tokens[i].length());
-						// operaciones = operaciones.insert(ind, "Â¿");
-						operaciones = insert(operaciones, ind, "Â¿");
+						// operaciones = operaciones.insert(ind, "¿");
+						operaciones = insert(operaciones, ind, "¿");
 					}
 				}
 
 				ArrayList<Double> token_line = new ArrayList<Double>();
 				int pos = 0;
 				for (int j = 0; j < operaciones.length(); j++) {
-					// if (operaciones.charAt(j).equals('Â¿')) {
-					if (operaciones.charAt(j) == 'Â¿') {
+					// if (operaciones.charAt(j).equals('¿')) {
+					if (operaciones.charAt(j) == '¿') {
 						token_line.add(TokenValue(tokens[pos++]));
 					}
 					// else if (operaciones.charAt(j).toString().equals(" ") ==
@@ -165,7 +165,7 @@ public class CodeConverter {
 					else if (operaciones.charAt(j) == ' '
 							&& operaciones.charAt(j) == '{'
 							&& operaciones.charAt(j) == '}') {
-						int next_quote = operaciones.indexOf("Â¿", j);
+						int next_quote = operaciones.indexOf("¿", j);
 						String op;
 						if (next_quote > j) {
 							op = operaciones.substring(j, next_quote);
@@ -227,12 +227,12 @@ public class CodeConverter {
 	// int ind = operaciones.indexOf(tokens[i]);
 	// operaciones = operaciones.substring(0, ind)
 	// + operaciones.substring(ind + tokens[i].length());
-	// operaciones = operaciones.insert(ind, "Â¿");
+	// operaciones = operaciones.insert(ind, "¿");
 	// }
 	// }
 	// java.util.ArrayList token_line = new java.util.ArrayList();
 	// operaciones = operaciones.trim();
-	// String[] ops = operaciones.split(new char[] { 'Â¿', ' ' },
+	// String[] ops = operaciones.split(new char[] { '¿', ' ' },
 	// StringSplitOptions.RemoveEmptyEntries);
 	// for (String s1 : ops) {
 	// String s = s1.trim();

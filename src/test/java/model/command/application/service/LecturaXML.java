@@ -32,7 +32,7 @@ public class LecturaXML {
 			Document doc = dBuilder.parse(myFile);
 			doc.getDocumentElement().normalize();
 
-			System.out.println("El elemento raíz es :: "
+			System.out.println("El elemento raiz es :: "
 					+ doc.getDocumentElement().getNodeName());
 			System.out.println("Primer nodo es :: classpathentry");
 
@@ -44,7 +44,7 @@ public class LecturaXML {
 			NamedNodeMap nnm = classpathentry.item(0).getAttributes();
 			String sourcePath = null;
 			for (int i = 0; i < nnm.getLength(); i++) {
-				System.out.println((i + 1) + "° atributo :: "
+				System.out.println((i + 1) + "N� atributo :: "
 						+ nnm.item(i).getNodeName());
 				if (nnm.item(i).getNodeName().equals("path")) {
 					sourcePath = nnm.item(i).getNodeValue();
